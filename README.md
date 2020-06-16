@@ -28,9 +28,29 @@ A modern React-based weather dashboard application that provides real-time weath
 
 ## Prerequisites
 
-- Node.js 12.x or higher
+- Node.js 12.x or higher (tested with Node.js 16-23)
 - npm 6.x or higher
 - OpenWeatherMap API key (free tier available)
+
+## Troubleshooting
+
+### Common Issues
+
+**Dependency conflicts during installation:**
+- Use `npm install --legacy-peer-deps` instead of `npm install`
+
+**OpenSSL errors when starting the development server:**
+- This occurs with newer Node.js versions (18+) due to legacy webpack configuration
+- Use `NODE_OPTIONS=--openssl-legacy-provider npm run dev` to start the app
+
+**API key errors:**
+- Make sure you've created a `.env` file from `.env.example`
+- Ensure your OpenWeatherMap API key is correctly set in the `.env` file
+- Restart the development server after adding the API key
+
+**Location services not working:**
+- Make sure your browser allows location access for the application
+- The app needs HTTPS or localhost to access geolocation APIs
 
 ## Installation
 
@@ -42,8 +62,10 @@ cd weather-dashboard
 
 2. Install dependencies:
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
+
+> **Note**: Use the `--legacy-peer-deps` flag to resolve dependency conflicts between React 17 and older Chart.js packages.
 
 3. Create a `.env` file in the root directory:
 ```bash
@@ -61,6 +83,12 @@ You can get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
 
 ### `npm start` or `npm run dev`
 Runs the app in development mode.
+
+If you encounter OpenSSL-related errors on newer Node.js versions, use:
+```bash
+NODE_OPTIONS=--openssl-legacy-provider npm run dev
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run build`

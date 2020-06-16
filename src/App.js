@@ -90,7 +90,16 @@ function App() {
         country: weatherData.sys.country
       });
     } catch (err) {
-      setError('Unable to fetch weather data. Please check the city name and try again.');
+      if (err.response?.status === 401) {
+        setError(`API Key Required: Please set up your OpenWeatherMap API key:
+        
+1. Get a free API key from https://openweathermap.org/api
+2. Create a .env file: cp .env.example .env
+3. Add your key: REACT_APP_OPENWEATHER_API_KEY=your_actual_key_here
+4. Restart the app`);
+      } else {
+        setError('Unable to fetch weather data. Please check the city name and try again.');
+      }
       console.error('Error loading weather:', err);
     } finally {
       setLoading(false);
@@ -112,7 +121,16 @@ function App() {
       setForecast(forecastData);
       setLocation(locationData);
     } catch (err) {
-      setError('Unable to fetch weather data for your location.');
+      if (err.response?.status === 401) {
+        setError(`API Key Required: Please set up your OpenWeatherMap API key:
+        
+1. Get a free API key from https://openweathermap.org/api
+2. Create a .env file: cp .env.example .env
+3. Add your key: REACT_APP_OPENWEATHER_API_KEY=your_actual_key_here
+4. Restart the app`);
+      } else {
+        setError('Unable to fetch weather data for your location.');
+      }
       console.error('Error loading weather:', err);
     } finally {
       setLoading(false);

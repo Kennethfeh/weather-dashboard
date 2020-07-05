@@ -27,10 +27,12 @@ const ErrorText = styled.div`
     font-size: 1.1rem;
   }
   
-  p {
+  p, pre {
     margin: 0;
     font-size: 0.95rem;
     opacity: 0.9;
+    white-space: pre-line;
+    line-height: 1.4;
   }
 `;
 

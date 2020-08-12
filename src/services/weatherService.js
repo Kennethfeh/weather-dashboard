@@ -3,6 +3,9 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY || 'demo';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
+// Configure default timeout for all requests
+axios.defaults.timeout = 10000; // 10 seconds
+
 class WeatherService {
   async getCurrentWeather(lat, lon) {
     try {
